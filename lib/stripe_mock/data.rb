@@ -748,6 +748,22 @@ module StripeMock
       }.merge(params)
     end
 
+    def self.mock_transfer_reversal(params={})
+      id = params[:id] || 'trr_test_transfer'
+      {
+        :id => id,
+        :object => "transfer_reversal",
+        :amount => 100,
+        :balance_transaction => nil,
+        :created => 1639076192,
+        :currency => "sgd",
+        :destination_payment_refund => nil,
+        :metadata => {},
+        :source_refund => nil,
+        :transfer => "tr_1K4rnAINPOiR8EtZniqS5i8r"
+      }.merge(params)
+    end
+
     def self.mock_payout(params={})
       currency = params[:currency] || StripeMock.default_currency
       id = params[:id] || 'po_test_payout'
