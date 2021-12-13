@@ -765,6 +765,7 @@ module StripeMock
     end
 
     def self.mock_payout(params={})
+      @timestamp ||= Time.now.to_i
       currency = params[:currency] || StripeMock.default_currency
       id = params[:id] || 'po_test_payout'
       {
@@ -774,8 +775,22 @@ module StripeMock
         :metadata => {},
         :currency => currency,
         :object => "payout",
-        :date => 1304114826,
+        :arrival_date => @timestamp + 86400, # 1 day later
         :description => "Payout description",
+        :automatic => true,
+        :balance_transaction => "txn_1032HU2eZvKYlo2CEPtcnUvl",
+        :created => @timestamp,
+        :destination => "ba_1K69Zv2eZvKYlo2CaYEhCVYl",
+        :failure_balance_transaction => nil,
+        :failure_code => nil,
+        :failure_message => nil,
+        :method => "standard",
+        :original_payout => nil,
+        :reversed_by => nil,
+        :source_type => "card",
+        :statement_descriptor => nil,
+        :status => "in_transit",
+        :type => "bank_account"
       }.merge(params)
     end
 
